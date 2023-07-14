@@ -215,12 +215,24 @@
                       </div>
                       <div class="col-md-6">
                         <label class="control-label">Date</label>
-
-                        <input type="date" class="form-control form-control-lg"
-                          id="formFileLg" name="date"
-                          placeholder="Date" />
-
+                        <input type="date" class="form-control form-control-lg" id="formFileLg" name="date" placeholder="Date" />
                       </div>
+                      
+                      <script>
+                        // Get the input element
+                        const dateInput = document.querySelector('#formFileLg');
+                      
+                        // Set the current date as the default value
+                        const currentDate = new Date().toISOString().split('T')[0];
+                        dateInput.value = currentDate;
+                      
+                        // Add event listener to update the value when another date is selected
+                        dateInput.addEventListener('change', (event) => {
+                          const selectedDate = event.target.value;
+                          // Do something with the selected date
+                        });
+                      </script>
+                      
                       <div class="col-md-6">
                         <label class="control-label">Image</label>
 
