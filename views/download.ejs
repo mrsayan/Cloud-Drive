@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="SemiColonWeb" />
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,600,700|Open+Sans:300,400,600,700,800,900"
+      rel="stylesheet" type="text/css" />
+    <link rel="stylesheet"
+      href="https://themes.semicolonweb.com/html/canvas/v5/css/bootstrap.css"
+      type="text/css" />
+    <link rel="stylesheet"
+      href="https://themes.semicolonweb.com/html/canvas/v5/style.css"
+      type="text/css" />
+    <link rel="stylesheet"
+      href="https://themes.semicolonweb.com/html/canvas/v5/css/dark.css"
+      type="text/css" />
+    <link rel="stylesheet"
+      href="https://themes.semicolonweb.com/html/canvas/v5/css/swiper.css"
+      type="text/css" />
+
+    <link rel="stylesheet"
+      href="https://themes.semicolonweb.com/html/canvas/v5/demos/business/business.css"
+      type="text/css" />
+    <link rel="stylesheet"
+      href="https://themes.semicolonweb.com/html/canvas/v5/demos/business/css/fonts.css"
+      type="text/css" />
+
+    <link rel="stylesheet"
+      href="https://themes.semicolonweb.com/html/canvas/v5/css/font-icons.css"
+      type="text/css" />
+    <link rel="stylesheet"
+      href="https://themes.semicolonweb.com/html/canvas/v5/css/animate.css"
+      type="text/css" />
+    <link rel="stylesheet"
+      href="https://themes.semicolonweb.com/html/canvas/v5/css/magnific-popup.css"
+      type="text/css" />
+    <link rel="stylesheet"
+      href="https://themes.semicolonweb.com/html/canvas/v5/one-page/css/et-line.css"
+      type="text/css" />
+    <link rel="stylesheet"
+      href="https://themes.semicolonweb.com/html/canvas/v5/css/responsive.css"
+      type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet"
+      href="https://themes.semicolonweb.com/html/canvas/v5/demos/business/css/colors.css"
+      type="text/css" />
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
+      integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css"
+      integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/timeline.css">
+    <style>
+    .fbox-icon>a>i {
+      color: black !important;
+    }
+
+    .navigation {
+      cursor: pointer;
+      color: black;
+      padding: 8px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 300ms;
+      font-size: 18px;
+    }
+
+    .navigation:hover {
+      background-color: #79E0EE;
+
+      border-radius: 50%;
+    }
+  </style>
+    <title>File Manager</title>
+
+  </head>
+
+  <body class="stretched">
+
+  <!--start-->
+<!-- <section> -->
+  <div id="wrapper" class="clearfix">
+    <%- include('header'); -%>
+    <div class="timeline">
+        <a class="next navigation"><i class="fas fa-arrow-left"></i></a>
+        <div class="timeline-slider">
+  
+        <% 
+          // Sort navFolder by date
+          navFolder.sort((a, b)=> new Date(b.date) - new Date(a.date)); 
+  
+          // Loop through each folder and create timeline nodes
+          for(let i = 0; i<navFolder.length; i++) {
+            let folder = navFolder[i];
+            let nextFolder = navFolder[i + 1];
+  
+            let widthValue;
+            
+            if(nextFolder){
+              // Calculate difference in days between current and next node,
+              // we assume that larger differences mean larger distances in our visualization.
+              let diffTime = Math.abs(new Date(folder.date) - new Date(nextFolder.date));
+              let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 *24)); 
+              
+              widthValue = diffDays * 5; // You need to define this scaleFactor according to how much space you want per day.
+              
+            } else {
+                widthValue= 20;   // Default value when there is no next Folder (end of timeline)
+             }
+  
+        %>
+  
+           <!-- Timeline Node -->
+           <div class="item">
+             <a href="/download/<%= folder._id %>">
+               <div id="<%= folder._id %>" class="node" title="<%= folder.desc %>"
+                 style="background-image: url('/files/thumbnail/<%= folder.img%>');"><i class="far fa-file"></i>
+             </a>
+  
+             <!-- TimeStamp -->
+             <div class ="date"> 
+               <%=folder.name%><br/>
+               <%=folder.date.toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"}) %>
+             </div>
+           </div>
+  
+  
+           <!-- Line representing distance/time between nodes -->
+  
+           <% if(i !== folders.length-1){ %>  
+  
+                 <!-- We skip line drawing at last iteration as there won't be any subsequent node-->
+  
+                  <!-- Draw two lines with calculated widths-->
+                  <div class="line" style='width:<%=80 + widthValue%>px'></div>
+                    <div class="line" style='width:<%=80 + widthValue%>px'></div>
+  
+         <%}%>
+  
+            </div><!-- End of Timeline Node -->
+       <% } /* End of For loop*/ %>    
+  
+      <!-- </div>End of timeline-slider div -->
+  
+  
+      <!-- Previous Button -->
+    </div>
+    <a class="prev navigation"><i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+  
+  
+  </section >
+
+  <!--end-->
+
+  <!--start-->
+  <!-- Folders and Files -->
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Folders -->
+      <!-- <div class="col-md-3">
+        <div class="card">
+          <h4 class="card-header bg-primary text-white">Folders</h4>
+          <div class="card-body">
+            <div class="row">
+              <% navFolder.forEach(folder => { %>
+              <div class="col-md-12 mb-4">
+                <div class="card folder-card">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <a href="/download/<%= folder.id %>"> <%= folder.name %> </a>
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Files -->
+      <div class="col-md-9">
+        <div class="card">
+          <!-- <h4 class="card-header bg-primary text-white">Files</h4> -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 mb-4">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search files" id="searchInput">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="searchButton">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            <p id="noFilesFoundMessage" style="display: none;">No files found.</p>
+            <% if (folders.files.length === 0) { %>
+            <p>No files found.</p>
+            <% } else { %>
+            <div class="row" id="fileList">
+              <% folders.files.forEach(file => { %>
+              <div class="col-md-4 mb-4 file-card">
+                <div class="card">
+                  <img src="/files/thumbnail/<%=file.img%>" class="card-img-top" alt="Thumbnail">
+                  <div class="card-body">
+                    <h5 class="card-title"> <%= file.name %> </h5>
+                    <p class="card-text"> Desc: <%= file.desc %><br> 
+                      <!-- Date: <%= file.date %>  -->
+                    </p> 
+                    
+                    <!-- Add 3 button - download, move, remove using API calls from path: apiController,js -->
+                    <div class="d-flex justify-content-between space-between-buttons">
+                      <button class="btn btn-primary download-btn" type="button" onclick="window.location.href='/api/download/<%= file._id %>'">
+                        <i class="fas fa-download"></i> Download
+                      </button>
+
+                      <% if(user.role == ''){ %>
+                      <form action="/api/remove-file" method="POST">
+                        <button class="btn btn-danger remove-btn" type="submit">
+                          <i class="fas fa-trash"></i> Remove
+                        </button>
+                        <input type="text" name="file" value="<%= file._id %>" hidden />
+                      </form>
+                      <form action="/api/move-file" method="POST" class="moveFileForm">
+                        <div class="form-group">
+                          <input type="hidden" class="form-control fileId" name="fileId" value="<%= file._id %>">
+                        </div>
+                        <div class="form-group">
+                          <select class="form-control targetFolderId" name="targetFolderId">
+                            <option value="" selected disabled>Move</option>
+                            <% navFolder.forEach(folder => { %>
+                            <option value="<%= folder._id %>"> <%= folder.name %> </option>
+                            <% }) %>
+                          </select>
+                        </div>
+                      </form>
+                      <script>
+                        // Attach event listener to all dropdown menus
+                        var targetFolderSelects = document.getElementsByClassName('targetFolderId');
+                        Array.from(targetFolderSelects).forEach(function(targetFolderSelect) {
+                          targetFolderSelect.addEventListener('change', function() {
+                            // Find the corresponding form for the selected dropdown menu
+                            var moveFileForm = targetFolderSelect.closest('.moveFileForm');
+                            moveFileForm.submit(); // Submit the form when a folder is selected
+                          });
+                        });
+                      </script>
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% }) %>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Search function
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const fileList = document.getElementById('fileList');
+    const noFilesFoundMessage = document.getElementById('noFilesFoundMessage');
+  
+    searchButton.addEventListener('click', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      let filesFound = false;
+  
+      Array.from(fileList.children).forEach((fileCard) => {
+        const fileName = fileCard.querySelector('.card-title').textContent.toLowerCase();
+        if (fileName.includes(searchTerm)) {
+          fileCard.style.display = 'block';
+          filesFound = true;
+        } else {
+          fileCard.style.display = 'none';
+        }
+      });
+  
+      if (filesFound) {
+        noFilesFoundMessage.style.display = 'none';
+      } else {
+        noFilesFoundMessage.style.display = 'block';
+      }
+    });
+  </script>
+  
+  
+
+  <!--end-->
+
+
+
+
+
+
+        <div class="description">
+          <h1>Description</h1>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas, alias
+          earum. Alias!
+        </div>
+        <%- include('footer'); -%>
+
+      </div>
+
+      <div id="gotoTop" class="icon-angle-up"></div>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://themes.semicolonweb.com/html/canvas/v5/js/jquery.js"></script>
+      <script src="https://themes.semicolonweb.com/html/canvas/v5/js/plugins.js"></script>
+
+      <script
+        src="https://themes.semicolonweb.com/html/canvas/v5/js/functions.js"></script>
+      <script defer
+        src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993"
+        integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA=="
+        data-cf-beacon='{"rayId":"796ef4a3de6a963e","token":"0627f0b8b73941069bc19139e63db853","version":"2022.11.3","si":100}'
+        crossorigin="anonymous"></script>
+      <script>
+      $(document).ready(function () {
+        let prev = 0
+        let next = 0
+        let pos = 0
+        $('.prev').click(function () {
+          prev += 1
+          pos -= 100
+          // console.log(pos)
+          $(".item").css('transform', 'translate(' + pos + 'px, 0)')
+        })
+        $('.next').click(function () {
+          next += 1
+          pos += 50
+          $(".item").css('transform', 'translate(' + pos + 'px, 0)')
+        })
+      });
+    </script>
+
+    </body>
+
+  </html>
