@@ -27,7 +27,7 @@ const createSendToken = (user, statusCode, res) => {
     ),
     httpOnly: true,
   };
-//   console.log(cookieOptions);
+  //   console.log(cookieOptions);
   if (process.env.ENVIRONMENT === "production") cookieOptions.secure = true;
   res.cookie("jwt", token, cookieOptions);
   user.password = undefined;
@@ -40,13 +40,12 @@ exports.signup = async (req, res, next) => {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-    //   passwordConfirm: req.body.passwordConfirm,
+      //   passwordConfirm: req.body.passwordConfirm,
     });
     createSendToken(newUser, 201, res);
   } catch (err) {
-    let message = `Duplicate value: ${Object.values(err.keyValue)[0]} for ${
-      Object.keys(err.keyValue)[0]
-    } field`;
+    let message = `Duplicate value: ${Object.values(err.keyValue)[0]} for ${Object.keys(err.keyValue)[0]
+      } field`;
     return res.render("error", {
       status: 400,
       message: message,
@@ -79,7 +78,7 @@ exports.login = async (req, res, next) => {
       status: 401,
       message: "Invalid email or password",
     });
-    // console.log(user)
+  // console.log(user)
 
   createSendToken(user, 200, res);
 };

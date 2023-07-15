@@ -131,3 +131,11 @@ out
 
 # vscode extensions
 .vscode/
+
+# files
+static/files/*.jpg
+static/files/thumbnail/*.jpg
+
+
+
+

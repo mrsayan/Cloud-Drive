@@ -199,39 +199,12 @@ exports.moveFile = async (req, res, next) => {
 
     res.redirect(req.get('referer'));
 
-  } 
-  
+  }
+
   catch (error) {
-  console.log(error)
-  res.json({
-    error
-  })
-}
+    console.log(error)
+    res.json({
+      error
+    })
+  }
 };
-
-/*
-Write the ejs file for the above route:
-2. move-file.ejs
-Code:
-<% include ../partials/header %>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <h1 class="text-center">Move File</h1>
-      <form action="/api/move-file" method="POST">
-        <div class="form-group">
-          <label for="fileId">File ID</label>
-          <input type="text" class="form-control" id="fileId" name="fileId" placeholder="Enter file ID">
-        </div>
-        <div class="form-group">
-          <label for="targetFolderId">Target Folder ID</label>
-          <input type="text" class="form-control" id="targetFolderId" name="targetFolderId" placeholder="Enter target folder ID">
-        </div>
-        <button type="submit" class="btn btn-primary">Move File</button>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-*/

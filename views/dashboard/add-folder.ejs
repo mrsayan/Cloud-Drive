@@ -84,7 +84,7 @@
                   <span class="hide-menu">Add User</span>
                 </a>
               </li>
-              
+
               <li class="sidebar-item">
                 <a class="sidebar-link" href="/dashboard/add-folder"
                   aria-expanded="false">
@@ -180,7 +180,7 @@
                 </div>
                 <div>
                   <h3 class="fw-semibold">Hi, <span class="text-dark"><%=
-                    user.name %></span>
+                      user.name %></span>
                   </h3>
                   <span>Cheers, and happy activities - <%= new
                     Date().toLocaleDateString('en-us', { weekday:"long",
@@ -215,9 +215,10 @@
                       </div>
                       <div class="col-md-6">
                         <label class="control-label">Date</label>
-                        <input type="date" class="form-control form-control-lg" id="formFileLg" name="date" placeholder="Date" />
+                        <input type="date" class="form-control form-control-lg"
+                          id="formFileLg" name="date" placeholder="Date" />
                       </div>
-                      
+
                       <script>
                         // Get the input element
                         const dateInput = document.querySelector('#formFileLg');
@@ -232,7 +233,7 @@
                           // Do something with the selected date
                         });
                       </script>
-                      
+
                       <div class="col-md-6">
                         <label class="control-label">Image</label>
 

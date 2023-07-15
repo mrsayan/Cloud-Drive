@@ -4,7 +4,7 @@ const path = require("path");
 
 const app = express();
 
-const upload = require("express-fileupload"); 
+const upload = require("express-fileupload");
 app.use(upload());
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,7 +18,7 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "static")));
 
 const User = require("./models/userModel")
-app.get("/add-admin", async(req, res) =>{
+app.get("/add-admin", async (req, res) => {
   const admin = await User.create({
     name: "ADMIN NAME",
     username: "admin",

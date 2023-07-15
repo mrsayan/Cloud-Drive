@@ -211,8 +211,10 @@
                       </div>
 
                       <% if (user.role === 'sub-admin') { %>
-                        <% const unsortedFolder = folders.find(folder => folder.name === 'Unsorted') %>
-                        <input type="hidden" name="folder" value="<%= unsortedFolder._id %>" />
+                      <% const unsortedFolder = folders.find(folder =>
+                      folder.name === 'Unsorted') %>
+                      <input type="hidden" name="folder"
+                        value="<%= unsortedFolder._id %>" />
                       <% } else { %>
                       <div class="col-md-6">
                         <label class="control-label"></label>
@@ -246,7 +248,9 @@
                           <label class="control-label">Date</label>
                           <input type="date"
                             class="form-control form-control-lg" id="formFileLg"
-                            name="date" value="<%= new Date().toISOString().substr(0, 10) %>" onchange="this.setAttribute('value', this.value);" />
+                            name="date"
+                            value="<%= new Date().toISOString().substr(0, 10) %>"
+                            onchange="this.setAttribute('value', this.value);" />
                         </div>
                       </div>
 

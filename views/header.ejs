@@ -4,8 +4,7 @@
   data-sticky-class="not-dark"
   data-responsive-class="not-dark"
   data-sticky-offset="full"
-  style="background-color: black"
->
+  style="background-color: black">
   <div id="header-wrap">
     <div class="container clearfix">
       <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
@@ -49,11 +48,11 @@
             <a href="/api/logout"><div>Logout</div></a>
           </li>
           <% }else {%>
-            <li>
-              <a href="/login"><div>Login</div></a>
-            </li>
-            <% } %>
-            <% if(user && user.role!= "user") {%>
+          <li>
+            <a href="/login"><div>Login</div></a>
+          </li>
+          <% } %>
+          <% if(user && user.role!= "user") {%>
           <li>
             <a href="/dashboard"><div>Dashboard</div></a>
           </li>
