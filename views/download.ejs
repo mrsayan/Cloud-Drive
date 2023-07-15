@@ -203,8 +203,8 @@
                   <img src="/files/thumbnail/<%=file.img%>" class="card-img-top" alt="Thumbnail">
                   <div class="card-body">
                     <h5 class="card-title"> <%= file.name %> </h5>
-                    <p class="card-text"> Desc: <%= file.desc %></br>
-                      Date: <%= file.date.toISOString().slice(0, 10) %></p>
+                    <p class="card-text" style="margin-bottom: 0;"> Desc: <%= file.desc %></p>
+                    <p class="card-date">Date: <%= file.date.toISOString().slice(0, 10) %></p>
                     
                     
                     <!-- Add 3 button - download, move, remove using API calls from path: apiController,js -->
@@ -284,7 +284,6 @@
     <% }) %>
 
     const calendarEl = document.getElementById('calendar');
-
     const calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
       events: datesWithFiles.map(date => {
