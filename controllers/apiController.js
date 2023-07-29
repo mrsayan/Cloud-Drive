@@ -208,3 +208,38 @@ exports.moveFile = async (req, res, next) => {
     })
   }
 };
+
+exports.addPermission = async (req, res, next) => {
+  try {
+    // Extract the file ID and new permission from the request body
+    const { fileId, permission } = req.body;
+
+    // Check if provided permission value is valid
+    if (!['user', 'admin'].includes(permission)) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Invalid permission type'
+      });
+    }
+
+    // Find File by id and update its permissions
+    let file = await File.findByIdAndUpdate(fileId, { permission }, { new: true });
+
+    if (!file) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'No file found with that ID'
+      });
+    }
+
+     // redirect to page where permissions were changed 
+     res.redirect(req.get('referer'));
+
+  }
+  catch (error) {
+   console.log(error)
+   res.json({
+       error
+   })
+ }
+};

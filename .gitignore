@@ -133,8 +133,8 @@ out
 .vscode/
 
 # files
-static/files/*.jpg
-static/files/thumbnail/*.jpg
+static/files/*.*
+static/files/thumbnail/*.*
 
 
 

@@ -96,7 +96,7 @@
   <body class="stretched">
 
 <!-- <section> -->
-  <div id="wrapper" class="clearfix">
+  <div id="wrapper" class="clearfix">`
     <%- include('header'); -%>
     <div class="timeline">
         <a class="next navigation"><i class="fas fa-arrow-left"></i></a>
@@ -197,7 +197,7 @@
             <p>No files found.</p>
             <% } else { %>
             <div class="row" id="fileList">
-              <% folders.files.forEach(file => { %>
+              <% folders.files.filter(file => file.permission === 'user').forEach(file => { %>
               <div class="col-md-4 mb-4 file-card">
                 <div class="card">
                   <img src="/files/thumbnail/<%=file.img%>" class="card-img-top" alt="Thumbnail">

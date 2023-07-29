@@ -24,12 +24,17 @@ const fileSchema = new mongoose.Schema({
   dateCreated: {
     type: Date,
     required: true,
-    default: Date.now
+    default: Date.now,
   },
   date: {
     type: Date,
     required: true,
   },
+  permission: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+},
 
 });
 
