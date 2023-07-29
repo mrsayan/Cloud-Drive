@@ -5,10 +5,10 @@
   justify-content: space-between;
   position: relative;
 }
-.timeline .next {
+.timeline .prev {
   margin-left: 40px;
 }
-.timeline .prev {
+.timeline .next {
   margin-right: 40px;
 }
 .timeline .timeline-slider {
@@ -27,8 +27,8 @@
   transition: 0.3s;
 }
 .timeline .node {
-  width: 12px !important;
-  height: 12px !important;
+  width: 15px !important;
+  height: 15px !important;
   border-radius: 50%;
   border: 0.1px solid black;
   position: relative;
@@ -38,14 +38,14 @@
   margin: 0px !important;
   background-color: black;
   transition: all 0.5s ease-in-out;
-  z-index: 1;
+  z-index: 0;
 }
 .timeline .node:hover {
   transform: scale(10);
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
   background-color: white;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .timeline .node:hover i {
   transform: scale(0.2);
@@ -76,9 +76,6 @@
 .timeline .line {
   height: 3px;
   background-color: black;
-}
-.item:last-child .line {
-  width: 1000vw !important;
 }
 
 .node:hover .description {

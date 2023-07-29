@@ -96,15 +96,15 @@
   <body class="stretched">
 
 <!-- <section> -->
-  <div id="wrapper" class="clearfix">`
+  <div id="wrapper" class="clearfix">
     <%- include('header'); -%>
     <div class="timeline">
         <a class="next navigation"><i class="fas fa-arrow-left"></i></a>
         <div class="timeline-slider">
   
         <% 
-          // Sort navFolder by date
-          navFolder.sort((a, b)=> new Date(b.date) - new Date(a.date)); 
+          // Sort folders by date
+          navFolder.sort((a, b)=> new Date(a.date) - new Date(b.date)); 
   
           // Loop through each folder and create timeline nodes
           for(let i = 0; i<navFolder.length; i++) {
@@ -144,7 +144,7 @@
   
            <!-- Line representing distance/time between nodes -->
   
-           <% if(i !== folders.length-1){ %>  
+           <% if(i !== navFolder.length-1){ %>  
   
                  <!-- We skip line drawing at last iteration as there won't be any subsequent node-->
   
@@ -158,6 +158,7 @@
        <% } /* End of For loop*/ %>    
   
       <!-- </div>End of timeline-slider div -->
+  
   
       <!-- Previous Button -->
     </div>
@@ -352,13 +353,13 @@
         let pos = 0
         $('.prev').click(function () {
           prev += 1
-          pos -= 100
+          pos -= 120
           // console.log(pos)
           $(".item").css('transform', 'translate(' + pos + 'px, 0)')
         })
         $('.next').click(function () {
           next += 1
-          pos += 50
+          pos += 70
           $(".item").css('transform', 'translate(' + pos + 'px, 0)')
         })
       });
