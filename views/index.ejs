@@ -84,6 +84,7 @@
   <body class="stretched">
     <div id="wrapper" class="clearfix">
       <%- include('header'); -%>
+      
 
       <section
         id="slider"
@@ -91,6 +92,7 @@
         data-loop="true"
       >
         <div class="slider-parallax-inner">
+          
           <div class="swiper-container swiper-parent">
             <div class="swiper-wrapper">
               <div
@@ -102,18 +104,23 @@
                 "
               >
                 <div class="container clearfix">
+                  
                   <div class="slider-caption slider-caption-center">
                     <h2 class="font-primary nott">Easy Access</h2>
                     <p class="t300 font-primary d-none d-sm-block">
                       Seamless file retrieval made simple.
                     </p>
+                    <% if(user){ %>
                     <a
                       href="/files"
                       class="button button-rounded button-large nott ls0 font-primary"
                       style="background-color:black !important"
                       >Go to files</a
                     >
+                    <% } %>
                   </div>
+                
+            
                 </div>
               </div>
               <div
@@ -125,16 +132,18 @@
               >
                 <div class="container clearfix">
                   <div class="slider-caption slider-caption-center">
-                    <h2 class="font-primary">Easy Collaboration</h2>
+                    <h2 class="font-primary">Easy Collab</h2>
                     <p class="t300 font-primary d-none d-sm-block">
                       Simplify file collaboration with seamless teamwork.
                     </p>
+                    <% if(user){ %>
                     <a
                       href="#"
                       class="button button-rounded button-large nott ls0 font-primary"
                       style="background-color:black !important"
                       >Get Started</a
                     >
+                    <% } %>
                   </div>
                 </div>
               </div>
@@ -159,8 +168,38 @@
               alt=""
           /></a>
         </div>
-      </section>
+        <% if(!user){ %>
+          <div class="col-md-2 mx-auto custom class" style="margin-top: 32%; width: 100%;">
+            <div id="contact-form-overlay-mini mx-auto" class="clearfix" style="width: 400px;">
+              <div class="form-widget ">
+                <div class="form-result"></div>
 
+                <form class="nobottommargin" action="/api/login" method="POST" enctype="application/x-www-form-urlencoded">
+                  <div class="col_full">
+                    <label for="template-contactform-email">Username <small>*</small></label>
+                    <input type="text" id="template-contactform-email" name="username" value class="required  sm-form-control" />
+                  </div>
+                  <div class="clear"></div>
+
+                  <div class="clear"></div>
+                  <div class="col_full">
+                    <label for="template-contactform-subject">Password <small>*</small></label>
+                    <input type="password" id="template-contactform-subject" name="password" class="required sm-form-control" />
+                  </div>
+
+                  <div class="col_full text-center"> <!-- Added text-center class here -->
+                    <button style="background-color: black !important" class="button button-3d nomargin" type="submit">Login</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% } %>
+
+
+      </section>
+      <!-- Add login panel to the right side overlay for the above section-->
+        
       <section id="content">
         <div class="content-wrap nobottompadding" style="z-index: 1">
           <div class="container topmargin clearfix">

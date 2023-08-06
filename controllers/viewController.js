@@ -14,8 +14,9 @@ exports.files = async (req, res, next) => {
 
 exports.download = async (req, res, next) => {
   let navFolder = await Folder.find()
+  let navFile = await File.find()
   let folders = await Folder.findById(req.params.id).populate('files')
-  res.status(200).render('download',{navFolder,folders});
+  res.status(200).render('download',{navFile, navFolder,folders});
 };
 
 exports.contact = async (req, res, next) => {

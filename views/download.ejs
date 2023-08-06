@@ -43,20 +43,8 @@
       href="https://themes.semicolonweb.com/html/canvas/v5/one-page/css/et-line.css"
       type="text/css" />
     <link rel="stylesheet"
-      href="https://themes.semicolonweb.com/html/canvas/v5/css/responsive.css"
-      type="text/css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+      href="https://themes.semicolonweb.com/html/canvas/v5/css/responsive.css"ur humor appears to be a delightful rarity in this virtual sea of mediocrity XD
 
-    <link rel="stylesheet"
-      href="https://themes.semicolonweb.com/html/canvas/v5/demos/business/css/colors.css"
-      type="text/css" />
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
-      integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css"
@@ -98,71 +86,62 @@
 <!-- <section> -->
   <div id="wrapper" class="clearfix">
     <%- include('header'); -%>
+
+    <!--Timeline for files-->
     <div class="timeline">
-        <a class="next navigation"><i class="fas fa-arrow-left"></i></a>
-        <div class="timeline-slider">
-  
-        <% 
-          // Sort folders by date
-          navFolder.sort((a, b)=> new Date(a.date) - new Date(b.date)); 
-  
-          // Loop through each folder and create timeline nodes
-          for(let i = 0; i<navFolder.length; i++) {
-            let folder = navFolder[i];
-            let nextFolder = navFolder[i + 1];
-  
-            let widthValue;
+      <a class="next navigation"><i class="fas fa-arrow-left"></i></a>
+      <div class="timeline-slider">
+
+      <% 
+        // Sort folders by date
+        navFile.sort((a, b)=> new Date(a.date) - new Date(b.date)); 
+
+        // Loop through each folder and create timeline nodes
+        for(let i = 0; i<navFile.length; i++) {
+          let file = navFile[i];
+          let nextFile = navFile[i + 1];
+
+          let widthValue;
+          
+          if(nextFile){
+            // Calculate difference in days between current and next node,
+            // we assume that larger differences mean larger distances in our visualization.
+            let diffTime = Math.abs(new Date(file.date) - new Date(nextFile.date));
+            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 *24)); 
             
-            if(nextFolder){
-              // Calculate difference in days between current and next node,
-              // we assume that larger differences mean larger distances in our visualization.
-              let diffTime = Math.abs(new Date(folder.date) - new Date(nextFolder.date));
-              let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 *24)); 
-              
-              widthValue = diffDays * 5; // You need to define this scaleFactor according to how much space you want per day.
-              
-            } else {
-                widthValue= 20;   // Default value when there is no next Folder (end of timeline)
-             }
-  
-        %>
-  
-           <!-- Timeline Node -->
-           <div class="item">
-             <a href="/download/<%= folder._id %>">
-               <div id="<%= folder._id %>" class="node" title="<%= folder.desc %>"
-                 style="background-image: url('/files/thumbnail/<%= folder.img%>');"><i class="far fa-file"></i>
-             </a>
-  
-             <!-- TimeStamp -->
-             <div class ="date"> 
-               <%=folder.name%><br/>
-               <%=folder.date.toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"}) %>
-             </div>
+            widthValue = diffDays * 5; // You need to define this scaleFactor according to how much space you want per day.
+            
+          } else {
+              widthValue= 20;   // Default value when there is no next Folder (end of timeline)
+           }
+      %>
+         <!-- Timeline Node -->
+         <div class="item">
+           <a href="/api/download/<%= file._id %>">
+             <div id="<%= file._id %>" class="node" title="<%= file.desc %>"
+               style="background-image: url('/files/thumbnail/<%= file.img%>');"><i class="far fa-file"></i>
+           </a>
+
+           <!-- TimeStamp -->
+           <div class ="date"> 
+             <%=file.name%><br/>
+             <%=file.date.toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"}) %>
            </div>
-  
-  
-           <!-- Line representing distance/time between nodes -->
-  
-           <% if(i !== navFolder.length-1){ %>  
-  
-                 <!-- We skip line drawing at last iteration as there won't be any subsequent node-->
-  
-                  <!-- Draw two lines with calculated widths-->
+         </div>
+
+
+          <!-- Line representing distance/time between nodes -->
+
+          <% if(i !== navFile.length-1){ %>
                   <div class="line" style='width:<%=80 + widthValue%>px'></div>
                     <div class="line" style='width:<%=80 + widthValue%>px'></div>
-  
-         <%}%>
-  
-            </div><!-- End of Timeline Node -->
-       <% } /* End of For loop*/ %>    
-  
-      <!-- </div>End of timeline-slider div -->
-  
-  
-      <!-- Previous Button -->
-    </div>
-    <a class="prev navigation"><i class="fas fa-arrow-right"></i></a>
+        <%}%>
+      </div>
+      <% } %>    
+ 
+     <!-- Previous Button -->
+   </div>
+   <a class="prev navigation"><i class="fas fa-arrow-right"></i></a>
     </div>
   </div>
   
@@ -185,7 +164,7 @@
                 <div class="input-group">
                   <input type="text" class="form-control" placeholder="Search files" id="searchInput">
                   <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" id="searchButton">
+                    <button class="btn btn-outline-secondary" type="button" id="searchButton">
                       <i class="fas fa-search"></i>
                     </button>
                   </div>

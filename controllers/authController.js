@@ -78,6 +78,7 @@ exports.login = async (req, res, next) => {
       status: 401,
       message: "Invalid email or password",
     });
+
   // console.log(user)
 
   createSendToken(user, 200, res);

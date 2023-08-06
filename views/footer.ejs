@@ -2,17 +2,19 @@
   <div id="copyrights">
     <div class="container clearfix" style="display: flex;align-items: center;">
       <div class="col_half">
-        <!-- <img
-            src="https://themes.semicolonweb.com/html/canvas/v5/images/footer-logo.png"
-            alt=""
-            class="footer-logo"
-          /> -->
-        Copyrights &copy; 2023 All Rights Reserved by LOGO.
+        Copyrights &copy; 2023 All Rights Reserved.
       </div>
       <div class="col_half col_last tright">
         <div class="copyrights-menu copyright-links fright clearfix">
-          <a href="/">Home</a>/<a href="/files">Files</a>/<a href="/about">About</a>/<a
-            href="/contact">Contact</a>/<a href="/login">Login</a>
+          <a href="/">Home</a>/<a href="/about">About</a>/<a
+            href="/contact">Contact</a>
+            <% if(user){ %>
+              /<a href="/files">Files</a>
+              /<a href="/api/logout">Logout</a>
+              <% }else {%>
+                
+                /<a href="/login">Login</a>
+              <% } %>
         </div>
         <br>
         <!-- <div class=" clearfix" style="margin:0 0 0 auto; display: block;">
